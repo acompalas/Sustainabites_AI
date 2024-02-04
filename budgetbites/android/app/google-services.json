@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "392930676085",
+    "project_id": "budget-bites-5d4e8",
+    "storage_bucket": "budget-bites-5d4e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392930676085:android:f4e5df002a8e7dbb88d73c",
+        "android_client_info": {
+          "package_name": "com.teambites.budgetbites"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbZla7G6vhpK84T1i-KOiAeYrD9r8BNSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
