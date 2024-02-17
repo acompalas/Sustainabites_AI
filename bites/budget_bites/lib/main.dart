@@ -1,87 +1,113 @@
 import 'package:flutter/material.dart';
-import 'test_page.dart'; // Import the test page file
+import 'package:test/signInUp/SignInUpComponents.dart';
+import 'package:test/themes/appColorTheme.dart';
+import 'package:test/themes/appTextTheme.dart';
 
-void main() {
-  runApp(const MyApp());
+//Variables for Responsive Design(Don't change)
+final double physicalHeight = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.height;
+final double physicalWidth = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width;
+final double devicePixelRatio = WidgetsBinding.instance.platformDispatcher.views.first.devicePixelRatio;
+final double screenHeight = physicalHeight / devicePixelRatio;
+final double screenWidth = physicalWidth / devicePixelRatio;
+final double fontMultiplier = screenHeight * .03;
+void main(){
+  WidgetsFlutterBinding.ensureInitialized(); //sets up the screen size variables
+  runApp(MaterialApp(
+      title: 'Budget Bites', //title of the app
+      debugShowCheckedModeBanner: false, //removes the debug sticker on the right corner of emulator
+      home: WelcomePage() //onces the app opens up go to splash page
+  ),);
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+
+class SplashPage extends StatelessWidget{ //splash page
+  int duration = 3; //seconds for how long splash page stays
+  Widget goToPage = WelcomePage();
+
+  SplashPage({super.key}); //going to openingPage after splash page
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+  Widget build(BuildContext context){
+
+    Future.delayed(Duration(seconds: duration), (){ //process of making the splash page stay for x seconds
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>goToPage)
+      ); 
+  });
+
+    return Scaffold( //return splash screen
+      //backgroundColor: Color(0x001AC84B),
+      body: Container(
+        color:  appColorTheme.backgroundColor, //setting the background color   
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-      routes: {
-        '/test': (context) => TestPage(), // Add route for the test page
-      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
 
-  final String title;
-
+class WelcomePage extends StatelessWidget{ //opening page
+  WelcomePage ({Key? key}) : super(key: key);
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-          SizedBox(height: 16), // Add some spacing between buttons
-          FloatingActionButton.extended(
-            onPressed: () {
-              Navigator.pushNamed(context, '/test');
-            },
-            label: Text('Test Page'),
-            icon: Icon(Icons.navigate_next),
-          ),
-        ],
-      ),
+      body: Container(
+        color: appColorTheme.backgroundColor,
+        child : Stack(
+          alignment: AlignmentDirectional.topEnd, //puts components from top to bottom
+          children: [
+            Center( //centering everything on the page
+              child: Column( //so things dont overlap
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: screenWidth * .8,
+                    height: screenHeight * .085,
+                    child: Text(         //title
+                      'Budget Bites',
+                      textAlign: TextAlign.center,
+                      style: appTextTheme.appTitle,
+                    ),
+                  ),
+                  // Text(         //title
+                  //   'Budget Bites',
+                  //   textAlign: TextAlign.center,
+                  //   style: appTextTheme.appTitle,
+                  // ),
+                  Container( //for text under title
+                    alignment: Alignment.center,
+                    width: screenWidth* .8,
+                    height: screenHeight * .14,
+                    padding: EdgeInsets.only(bottom: screenHeight * .01),
+                    child : Text(
+                        'Let\'s help you clean your pantry',
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        style: appTextTheme.textUnderTitle,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.only(bottom : screenHeight * 0.01)),
+                  Container( //container for logo
+                    height: screenHeight * .2,
+                    alignment: Alignment.center,
+                    decoration : BoxDecoration(
+                      color: appColorTheme.backgroundColor,
+                    ),
+                    child : Image.asset(
+                      'assets/imgs/logo.png',
+                      fit: BoxFit.fitHeight,
+                    )
+                  ),
+                  Padding(padding: EdgeInsets.only(bottom: screenHeight *.125)),//space between logo and button
+                  signInOutButton(buttonText: 'Sign In'),
+                  Padding(padding: EdgeInsets.only(bottom: screenHeight * .05)),//space between the two buttons
+                  signInOutButton(buttonText: 'Sign Up'),
+                ],
+              )
+            )
+          ]
+        )
+      )
     );
+    
   }
 }
