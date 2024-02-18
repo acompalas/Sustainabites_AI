@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:test/main.dart';
-import 'package:test/themes/appColorTheme.dart';
+import 'package:budget_bites/main.dart';
+import 'package:budget_bites/themes/appColorTheme.dart';
 
 class appTextTheme{
   static TextStyle appTitle = TextStyle( //used for 'Budget Bites' Title in beginning screens

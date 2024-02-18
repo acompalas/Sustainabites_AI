@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test/main.dart';
-import 'package:test/themes/appColorTheme.dart';
-import 'package:test/themes/appTextTheme.dart';
+import 'package:budget_bites/main.dart';
+import 'package:budget_bites/themes/appColorTheme.dart';
+import 'package:budget_bites/themes/appTextTheme.dart';
 class signInPage extends StatelessWidget {
   const signInPage({super.key});
 

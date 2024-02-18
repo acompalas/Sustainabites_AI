@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:test/signInUp/SignInUpComponents.dart';
-import 'package:test/themes/appColorTheme.dart';
-import 'package:test/themes/appTextTheme.dart';
+import 'package:budget_bites/signInUp/SignInUpComponents.dart';
+import 'package:budget_bites/themes/appColorTheme.dart';
+import 'package:budget_bites/themes/appTextTheme.dart';
 
 //Variables for Responsive Design(Don't change)
 final double physicalHeight = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.height;

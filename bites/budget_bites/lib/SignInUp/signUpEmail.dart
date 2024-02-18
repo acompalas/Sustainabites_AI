@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:test/main.dart';
-import 'package:test/signInUp/SignInUpComponents.dart';
-import 'package:test/themes/appColorTheme.dart';
-import 'package:test/themes/appTextTheme.dart';
+import 'package:budget_bites/main.dart';
+import 'package:budget_bites/signInUp/SignInUpComponents.dart';
+import 'package:budget_bites/themes/appColorTheme.dart';
+import 'package:budget_bites/themes/appTextTheme.dart';
 class signUpEmail extends StatefulWidget{
   @override
   _signUpEmail createState()=> _signUpEmail();

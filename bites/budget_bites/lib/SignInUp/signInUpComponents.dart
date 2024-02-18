@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:test/SignInUp/signUpEmail.dart';
-import 'package:test/SignInUp/signUpName.dart';
-import 'package:test/main.dart';
-import 'package:test/themes/appColorTheme.dart';
-import 'package:test/themes/appTextTheme.dart';
-import 'package:test/signInUp/SignInPage.dart';
+import 'package:budget_bites/SignInUp/signUpEmail.dart';
+import 'package:budget_bites/SignInUp/signUpName.dart';
+import 'package:budget_bites/main.dart';
+import 'package:budget_bites/themes/appColorTheme.dart';
+import 'package:budget_bites/themes/appTextTheme.dart';
+import 'package:budget_bites/signInUp/SignInPage.dart';
 
 class signInOutButton extends StatelessWidget { //button style used to for the welcomePage
   final String buttonText; //text to use for button
