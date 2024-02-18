@@ -16,6 +16,13 @@ class appTextTheme{
     color: appColorTheme.blackText,
     height: 1, //height between lines
   );
+  static TextStyle textUnderTitleSmaller = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 1.4,
+    fontWeight: FontWeight.w100,
+    color: appColorTheme.blackText,
+    height: 1,
+  );
   static TextStyle signInUpButton = TextStyle(
     fontFamily: 'JosefinSans',
     fontSize: fontMultiplier * 1.85,

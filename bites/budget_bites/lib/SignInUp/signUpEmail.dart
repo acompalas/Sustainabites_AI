@@ -1,8 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
-import 'package:budget_bites/signInUp/SignInUpComponents.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
+import 'package:budget_bites/signInUp/signUpName.dart';
+
+class enterEmailText extends StatelessWidget{
+  enterEmailText({super.key});
+  @override
+  Widget build(BuildContext context){
+    return SizedBox(
+      width: screenWidth * .8,
+      height: screenHeight * .1,
+      child : TextField(
+        decoration: InputDecoration(
+          fillColor: appColorTheme.textLabelBackground,
+          filled: false,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          hintText: 'Enter Email', 
+          hintStyle: appTextTheme.signInUpTextLabel,
+          hintMaxLines: 1,
+        ),
+    )
+    );
+  }
+}
+
+
+class enterEmailButton extends StatelessWidget{
+  enterEmailButton({super.key});
+  @override
+  Widget build(BuildContext context){
+    return InkWell(
+      child: Container(
+        height: screenHeight * .07,
+      width: screenWidth * .7,
+      child: Center(
+        child : Text(
+          'Continue',
+          style: appTextTheme.signInUpButton,
+        )
+      ),
+      decoration: BoxDecoration(
+        color: appColorTheme.buttonColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      ),
+      onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => signUpName()),);
+      },
+    );
+  }
+}
+
+
+
 class signUpEmail extends StatefulWidget{
   @override
   _signUpEmail createState()=> _signUpEmail();

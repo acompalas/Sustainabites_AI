@@ -1,8 +1,9 @@
+import 'package:budget_bites/recipes.dart';
 import 'package:flutter/material.dart';
-import 'package:budget_bites/signInUp/SignInUpComponents.dart';
+import 'package:budget_bites/SignInUp/signUpEmail.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
-
+import 'package:budget_bites/signInUp/SignInPage.dart';
 //Variables for Responsive Design(Don't change)
 final double physicalHeight = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.height;
 final double physicalWidth = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width;
@@ -109,5 +110,41 @@ class WelcomePage extends StatelessWidget{ //opening page
       )
     );
     
+  }
+}
+
+
+class signInOutButton extends StatelessWidget { //button style used to for the welcomePage
+  final String buttonText; //text to use for button
+  signInOutButton({super.key,
+    required this.buttonText, //required text to make button
+  });
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      child: Container(
+        height: screenHeight * .07,
+      width: screenWidth * .8,
+      child: Center(
+        child : Text(
+          buttonText,
+          style: appTextTheme.signInUpButton,
+        )
+      ),
+      decoration: BoxDecoration(
+        color: appColorTheme.buttonColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      ),
+      onTap: (){
+        if(buttonText == 'Sign In'){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const signInPage()),);
+        }
+        else{
+          Navigator.push(context, MaterialPageRoute(builder: (context) => signUpEmail()),);
+        }
+      },
+      
+    );
   }
 }

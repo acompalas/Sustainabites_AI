@@ -1,8 +1,81 @@
+import 'package:budget_bites/SignInUp/signUpPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
-import 'package:budget_bites/signInUp/SignInUpComponents.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
+
+class enterFirstNameText extends StatelessWidget{
+  enterFirstNameText({super.key});
+  @override
+  Widget build(BuildContext context){
+    return SizedBox(
+      width: screenWidth * .8,
+      height: screenHeight * .08,
+      child : TextField(
+        decoration: InputDecoration(
+          fillColor: appColorTheme.textLabelBackground,
+          filled: false,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          hintText: 'First Name', 
+          hintStyle: appTextTheme.signInUpTextLabel,
+          hintMaxLines: 1,
+        ),
+    )
+    );
+  }
+}
+
+class enterLastNameText extends StatelessWidget{
+  enterLastNameText({super.key});
+  @override
+  Widget build(BuildContext context){
+    return SizedBox(
+      width: screenWidth * .8,
+      height: screenHeight * .08,
+      child : TextField(
+        decoration: InputDecoration(
+          fillColor: appColorTheme.textLabelBackground,
+          filled: false,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          hintText: 'Last Name', 
+          hintStyle: appTextTheme.signInUpTextLabel,
+          hintMaxLines: 1,
+        ),
+    )
+    );
+  }
+}
+
+
+class enterNameButton extends StatelessWidget{
+  enterNameButton({super.key});
+  @override
+  Widget build(BuildContext context){
+    return InkWell(
+      child: Container(
+        height: screenHeight * .07,
+      width: screenWidth * .7,
+      child: Center(
+        child : Text(
+          'Continue',
+          style: appTextTheme.signInUpButton,
+        )
+      ),
+      decoration: BoxDecoration(
+        color: appColorTheme.buttonColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      ),
+      onTap: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => signUpPassword()),);
+      },
+    );
+  }
+}
 class signUpName extends StatefulWidget{
   @override
   _signUpName createState()=> _signUpName();
@@ -40,7 +113,7 @@ class _signUpName extends State<signUpName> {
                   Padding(padding: EdgeInsets.only(bottom: screenHeight * .025)),
                   enterLastNameText(),
                   Padding(padding: EdgeInsets.only(bottom: screenHeight * .4)),
-                  enterEmailButton(),
+                  enterNameButton(),
                 ],
               )
             )

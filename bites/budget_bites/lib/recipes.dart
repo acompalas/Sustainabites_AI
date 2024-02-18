@@ -4,7 +4,7 @@ import 'recipe_api.dart';
 class RecipesPage extends StatefulWidget {
   final List<String> selectedIngredients;
 
-  const RecipesPage({Key? key, required this.selectedIngredients}) : super(key: key);
+  RecipesPage({Key? key, required this.selectedIngredients}) : super(key: key);
 
   @override
   _RecipesPageState createState() => _RecipesPageState();
