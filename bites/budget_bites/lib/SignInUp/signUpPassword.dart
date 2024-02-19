@@ -71,6 +71,8 @@ class enterPasswordText extends StatelessWidget{
       width: screenWidth * .8,
       height: screenHeight * .08,
       child : TextField(
+        obscureText: true,
+        obscuringCharacter: '*',
         decoration: InputDecoration(
           fillColor: appColorTheme.textLabelBackground,
           filled: false,
@@ -94,6 +96,8 @@ class enterPasswordAgainText extends StatelessWidget{
       width: screenWidth * .8,
       height: screenHeight * .08,
       child : TextField(
+        obscureText: true,
+        obscuringCharacter: '*',
         decoration: InputDecoration(
           fillColor: appColorTheme.textLabelBackground,
           filled: false,

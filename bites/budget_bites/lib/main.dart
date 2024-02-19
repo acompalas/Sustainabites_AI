@@ -138,7 +138,7 @@ class signInOutButton extends StatelessWidget { //button style used to for the w
       ),
       onTap: (){
         if(buttonText == 'Sign In'){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const signInPage()),);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => signInPage()),);
         }
         else{
           Navigator.push(context, MaterialPageRoute(builder: (context) => signUpEmail()),);
