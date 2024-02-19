@@ -35,4 +35,10 @@ class appTextTheme{
     fontWeight: FontWeight.w100,
     color:appColorTheme.textLabel,
   );
+  static TextStyle smallerButtonText = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 1.5,
+    fontWeight: FontWeight.w200,
+    color: appColorTheme.buttonTextColor,
+  );
 }

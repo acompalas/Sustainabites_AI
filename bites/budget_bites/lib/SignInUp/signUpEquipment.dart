@@ -1,3 +1,4 @@
+import 'package:budget_bites/SignInUp/signInPantry.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
@@ -78,7 +79,7 @@ class enterEquipmentButton extends StatelessWidget{
       ),
       ),
       onTap: (){
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => signUpCuisine()),);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => signUpPantry()),);
       },
     );
   }
