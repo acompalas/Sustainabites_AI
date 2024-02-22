@@ -1,28 +1,63 @@
+import 'package:budget_bites/SignInUp/signUpPassword.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
-import 'package:budget_bites/signInUp/signUpName.dart';
 
-class enterEmailText extends StatelessWidget{
-  enterEmailText({super.key});
+String _email = "";
+final _formKey = GlobalKey<FormState>();
+
+class enterEmailText extends StatefulWidget{
+  @override
+  _enterEmailTextState createState()=> _enterEmailTextState();
+}
+
+class _enterEmailTextState extends State<enterEmailText>{
+  TextEditingController _emailController = TextEditingController();
+  String? _emailError;
+
+  bool isEmailValid(String email) {
+    // Basic email validation using regex
+    // You can implement more complex validation if needed
+    return RegExp(r'^[\w-\.]+@[a-zA-Z]+\.[a-zA-Z]{2,}$').hasMatch(email);
+  }
+
   @override
   Widget build(BuildContext context){
-    return SizedBox(
-      width: screenWidth * .8,
-      height: screenHeight * .1,
-      child : TextField(
-        decoration: InputDecoration(
-          fillColor: appColorTheme.textLabelBackground,
-          filled: false,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20.0),
+    return Form(
+      key: _formKey,
+      child: SizedBox(
+        width: screenWidth * .8,
+        height: screenHeight * .1,
+        child: TextFormField(
+          decoration: InputDecoration(
+            fillColor: appColorTheme.textLabelBackground,
+            filled: false,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            hintText: 'Email',
+            hintStyle: appTextTheme.signInUpTextLabel,
+            hintMaxLines: 1,
+            errorText: _emailError,
           ),
-          hintText: 'Enter Email', 
-          hintStyle: appTextTheme.signInUpTextLabel,
-          hintMaxLines: 1,
+          validator: (val) {
+            if (val == null || val.isEmpty) {
+              return 'Email is required';
+            } else if (!isEmailValid(val)) {
+              return 'Enter a valid email address';
+            }
+            return null; // Return null when validation passes
+          },
+          onChanged: (val) {
+            setState(() {
+              // Clear error text when the input changes
+              _emailError = null;
+            });
+            _email = val;
+          },
         ),
-    )
+      ),
     );
   }
 }
@@ -48,13 +83,17 @@ class enterEmailButton extends StatelessWidget{
       ),
       ),
       onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => signUpName()),);
+          if (_formKey.currentState!.validate()) {
+          // Validation passed, navigate to the next screen
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => signUpPassword(email: _email,)),
+          );
+        }
       },
     );
   }
 }
-
-
 
 class signUpEmail extends StatefulWidget{
   @override
