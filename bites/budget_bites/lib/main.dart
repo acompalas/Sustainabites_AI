@@ -1,9 +1,12 @@
 import 'package:budget_bites/recipes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/SignInUp/signUpEmail.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
 import 'package:budget_bites/signInUp/SignInPage.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 //Variables for Responsive Design(Don't change)
 final double physicalHeight = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.height;
 final double physicalWidth = WidgetsBinding.instance.platformDispatcher.views.first.physicalSize.width;
@@ -11,8 +14,11 @@ final double devicePixelRatio = WidgetsBinding.instance.platformDispatcher.views
 final double screenHeight = physicalHeight / devicePixelRatio;
 final double screenWidth = physicalWidth / devicePixelRatio;
 final double fontMultiplier = screenHeight * .03;
-void main(){
+void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //sets up the screen size variables
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(MaterialApp(
       title: 'Budget Bites', //title of the app
       debugShowCheckedModeBanner: false, //removes the debug sticker on the right corner of emulator

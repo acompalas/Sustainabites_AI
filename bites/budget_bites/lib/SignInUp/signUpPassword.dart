@@ -1,4 +1,5 @@
 import 'package:budget_bites/SignInUp/signUpName.dart';
+import 'package:budget_bites/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
@@ -28,8 +29,12 @@ class _signUpPassword extends State<signUpPassword> {
   }
 
   // auth
-  void createacc(String pass) {
+  void createacc(String pass) async {
     print('Email: $_email, Password: $pass');
+
+    final AuthService _auth = AuthService();
+
+    await _auth.registerWEP(_email, pass);
   }
 
   @override
@@ -222,7 +227,7 @@ class enterPasswordButton extends StatelessWidget{
         borderRadius: BorderRadius.circular(30),
       ),
       ),
-      onTap: (){
+      onTap: () async {
           if (_formKeyPass1.currentState!.validate() && _formKeyPass2.currentState!.validate()) {
           // Validation passed, navigate to the next screen
           createacc(_pass2);
