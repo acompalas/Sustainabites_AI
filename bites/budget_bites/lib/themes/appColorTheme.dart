@@ -10,6 +10,9 @@ class appColorTheme{
   static const Color blackText =  Color.fromARGB(255, 0, 0, 0); //used for text
   static const Color backgroundColor = Color(0xFFFCEBEB); //that pinkish background
   static const Color whiteColor = Color.fromARGB(255, 255, 255, 255); 
+  static const Color navBarBackground = Color.fromARGB(255, 255, 255, 255);
+  static const Color navBarSelectedColor = Color.fromARGB(255, 0, 0, 0);
+  static const Color navBarUnSelectedColor = Color.fromARGB(238, 84, 86, 85);
   //errors (don't use for anything else)
   static const Color errorRed = Color.fromARGB(255, 225, 9, 9);
   //text label color

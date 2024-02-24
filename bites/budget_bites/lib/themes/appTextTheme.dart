@@ -41,4 +41,20 @@ class appTextTheme{
     fontWeight: FontWeight.w200,
     color: appColorTheme.buttonTextColor,
   );
+  static TextStyle navBarText = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * .7,
+    fontWeight: FontWeight.w300,
+    //color: appColorTheme.buttonTextColor,
+  );
+  static TextStyle searchBar = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 1.1,
+    fontWeight: FontWeight.w200,
+  );
+  static TextStyle cuisineBarText = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 0.6,
+    fontWeight: FontWeight.w200,
+  );
 }
