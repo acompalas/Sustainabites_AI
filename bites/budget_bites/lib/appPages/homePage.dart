@@ -9,51 +9,49 @@ import 'package:budget_bites/appPages/ingredients.dart';
 class MyPantry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Get the screen width and height
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
-
-    // Calculate the desired width and height of the SizeBox
-    final double boxWidth = screenWidth * 0.98; // 98% of screen width
-    final double boxHeight = screenHeight * 0.25; // 25% of screen height
+    final double boxWidth = screenWidth * 0.98;
+    final double boxHeight = screenHeight * 0.25;
 
     return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          // Handle button press action
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => IngredientsPage()),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+      child: Hero(
+        tag: 'pantryImage', // Unique tag for the Hero widget
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => IngredientsPage()),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 4,
           ),
-          elevation: 4, // Add elevation for shadow effect
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20), // Rounded corners
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 3,
-                blurRadius: 7,
-                offset: Offset(0, 3), // Shadow position
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 7,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                'assets/imgs/pantry.png',
+                width: boxWidth,
+                height: boxHeight,
+                fit: BoxFit.cover,
               ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius:
-                BorderRadius.circular(20), // Clip image to rounded corners
-            child: Image.asset(
-              'assets/imgs/pantry.png',
-              width: boxWidth, // Set image width to match button width
-              height: boxHeight, // Set image height to match button height
-              fit: BoxFit.cover, // Scale and crop the image to fill the button
             ),
           ),
         ),
