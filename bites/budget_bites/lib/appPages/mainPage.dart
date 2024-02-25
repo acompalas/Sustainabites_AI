@@ -6,6 +6,7 @@ import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/appPages/homePage.dart';
+import 'package:budget_bites/appPages/accountPage.dart';
 //import 'package:budget_bites/main.dart';
 
 class mainPage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _mainPage extends State<mainPage> {
     discoverPage(),
     savedPage(),
     cartPage(),
-    //accountPage(),
+    AccountPage(),
   ];
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +42,8 @@ class _mainPage extends State<mainPage> {
           BottomNavigationBarItem(icon: Icon(Icons.receipt), label: "Saved"),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag), label: "Cart"),
-          // BottomNavigationBarItem(
-          //     icon: Icon(Icons.account_circle), label: "Account"),
+           BottomNavigationBarItem(
+               icon: Icon(Icons.account_circle), label: "Account"),
         ],
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = index),

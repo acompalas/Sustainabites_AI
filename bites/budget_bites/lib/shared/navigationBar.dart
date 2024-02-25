@@ -5,6 +5,8 @@ import 'package:budget_bites/main.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
 import 'package:flutter/material.dart';
+import 'package:budget_bites/appPages/homePage.dart';
+import 'package:budget_bites/appPages/accountPage.dart';
 //import 'package:budget_bites/main.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -16,11 +18,11 @@ class _BottomNavBar extends State<BottomNavBar> {
   @override
   int currentIndex = 0;
   final screens = [
-    //homePage(),
+    HomePage(),
     discoverPage(),
     savedPage(),
     cartPage(),
-    //accountPage(),
+    AccountPage(),
   ];
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -33,11 +35,11 @@ class _BottomNavBar extends State<BottomNavBar> {
       unselectedItemColor: appColorTheme.navBarUnSelectedColor,
       backgroundColor: appColorTheme.navBarBackground,
       items: [
-        //BottomNavigationBarItem(icon: Icon(Icons.home), label : "Home"),
+        BottomNavigationBarItem(icon: Icon(Icons.home), label : "Home"),
         BottomNavigationBarItem(icon: Icon(Icons.search), label: "Discover"),
         BottomNavigationBarItem(icon: Icon(Icons.receipt), label: "Saved"),
         BottomNavigationBarItem(icon: Icon(Icons.shopping_bag), label: "Cart"),
-        //BottomNavigationBarItem(icon: Icon(Icons.account_circle),label : "Account"),
+        BottomNavigationBarItem(icon: Icon(Icons.account_circle),label : "Account"),
       ],
       currentIndex: currentIndex,
       onTap: (index) => setState(() => currentIndex = index),

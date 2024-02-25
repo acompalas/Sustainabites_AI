@@ -3,7 +3,8 @@ import 'package:budget_bites/appPages/discoverPage.dart';
 import 'package:budget_bites/appPages/mainPage.dart';
 import 'package:budget_bites/shared/navigationBar.dart';
 import 'package:budget_bites/appPages/homePage.dart';
-import 'package:budget_bites/appPages/homePage.dart';
+import 'package:budget_bites/appPages/accountPage.dart';
+//bites\budget_bites\lib\appPages\accountPage.dart
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';

@@ -72,4 +72,11 @@ class appTextTheme {
     fontWeight: FontWeight.w400,
     color: appColorTheme.blackText,
   );
+  static TextStyle accountPageTitle = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 2,
+    fontWeight: FontWeight.w400,
+    color: appColorTheme.blackText,
+    height: 1,
+  );
 }
