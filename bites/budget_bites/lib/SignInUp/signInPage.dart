@@ -1,4 +1,7 @@
+import 'package:budget_bites/appPages/cartPage.dart';
 import 'package:budget_bites/appPages/discoverPage.dart';
+import 'package:budget_bites/appPages/mainPage.dart';
+import 'package:budget_bites/shared/navigationBar.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
@@ -136,7 +139,7 @@ class signInButton extends StatelessWidget{
       ),
       ),
       onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => discoverPage()),);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => mainPage()),);
       },
     );
   }

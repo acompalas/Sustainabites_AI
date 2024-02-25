@@ -9,7 +9,11 @@ class appColorTheme{
   //used in all of the app
   static const Color blackText =  Color.fromARGB(255, 0, 0, 0); //used for text
   static const Color backgroundColor = Color(0xFFFCEBEB); //that pinkish background
-  static const Color whiteColor = Color.fromARGB(255, 255, 255, 255); 
+  static const Color whiteColor = Color.fromARGB(255, 255, 255, 255);
+  //cuisine filter
+  static const Color cuisineUnselected = Color.fromARGB(255, 255, 255, 255);
+  static const Color cuisineSelected = Color.fromARGB(255, 0, 0, 0);  
+  //navbar stuff
   static const Color navBarBackground = Color.fromARGB(255, 255, 255, 255);
   static const Color navBarSelectedColor = Color.fromARGB(255, 0, 0, 0);
   static const Color navBarUnSelectedColor = Color.fromARGB(238, 84, 86, 85);

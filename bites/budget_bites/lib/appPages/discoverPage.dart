@@ -13,7 +13,7 @@ class _discoverPage extends State<discoverPage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      bottomNavigationBar: BottomNavBar(),
+      //bottomNavigationBar: BottomNavBar(),
       resizeToAvoidBottomInset: false,
       backgroundColor: appColorTheme.backgroundColor,
       body: Container(
@@ -38,12 +38,6 @@ class _discoverPage extends State<discoverPage>{
     );
   }
 }
-
-
-
-
-
-
 
 
 class discoverSearchBar extends StatefulWidget{
@@ -90,14 +84,52 @@ class _discoverSearchBar extends State<discoverSearchBar>{
   }
 }
 
+
+
+class cuisine{
+  String cuisineName;
+  bool selected;
+  cuisine(this.cuisineName, this.selected);
+}
+
 class cuisineBar extends StatefulWidget{
   @override
   _cuisineBar createState()=> _cuisineBar();
 }
 class _cuisineBar extends State<cuisineBar>{
-  final List<String> cuisineList = <String>['Cuisine 1', 'Cuisine2', 'Cuisine 3', 'Cuisine 4', 'Cuisine 5', 'Cuisine 6', 'Cuisine 7', 'Cuisine 8'];
+  final List<cuisine> cuisineList = <cuisine>[
+    cuisine('African',false), 
+    cuisine('Asian',false), 
+    cuisine('American',false), 
+    cuisine('British',false), 
+    cuisine('Cajun',false), 
+    cuisine('Caribbean',false), 
+    cuisine('Chinese',false), 
+    cuisine('Eastern European',false), 
+    cuisine('European',false), 
+    cuisine('French',false), 
+    cuisine('German',false), 
+    cuisine('Greek',false), 
+    cuisine('Indian',false), 
+    cuisine('Irish',false), 
+    cuisine('Italian',false), 
+    cuisine('Japanese',false), 
+    cuisine('Jewish',false), 
+    cuisine('Korean',false), 
+    cuisine('Latin American',false), 
+    cuisine('Mediterranean',false), 
+    cuisine('Mexican',false), 
+    cuisine('Middle Eastern',false), 
+    cuisine('Nordic', false),
+    cuisine('Southern', false),
+    cuisine('Spanish', false),
+    cuisine('Thai', false),
+    cuisine('Vietnamese', false),
+  ];
+  Color _colorContainer = appColorTheme.cuisineUnselected;
   @override
   Widget build(BuildContext context){
+    cuisineList.shuffle();
     return Container(
       height: screenHeight * .03,
       width: screenWidth * .95,
@@ -114,17 +146,29 @@ class _cuisineBar extends State<cuisineBar>{
               padding: EdgeInsets.only(left: screenWidth * .01, right: screenWidth * .01),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: appColorTheme.signInUpGreenText,
+                color: _colorContainer,
               ),
               child: Center(
                 child: Text( 
-                  '${cuisineList[index]}',
+                  cuisineList[index].cuisineName,
                   style: appTextTheme.cuisineBarText,
                   textAlign: TextAlign.center,
                 ),
               ), 
             ),   
-            onTap: (){} ,     
+            onTap: (){
+              setState(() {
+                if(cuisineList[index].selected == false){
+                  cuisineList[index].selected == true;
+                }
+                else{
+                  cuisineList[index].selected == false;
+                }
+                _colorContainer = _colorContainer == appColorTheme.cuisineUnselected ? 
+                    appColorTheme.cuisineSelected : 
+                    appColorTheme.cuisineUnselected;
+              });
+            } ,     
           );
         }
       )

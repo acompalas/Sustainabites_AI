@@ -1,4 +1,7 @@
-import 'package:budget_bites/recipes.dart';
+import 'package:budget_bites/appPages/cartPage.dart';
+import 'package:budget_bites/appPages/discoverPage.dart';
+import 'package:budget_bites/appPages/savedPage.dart';
+import 'package:budget_bites/archived/recipes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/SignInUp/signUpEmail.dart';
@@ -14,6 +17,7 @@ final double devicePixelRatio = WidgetsBinding.instance.platformDispatcher.views
 final double screenHeight = physicalHeight / devicePixelRatio;
 final double screenWidth = physicalWidth / devicePixelRatio;
 final double fontMultiplier = screenHeight * .03;
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized(); //sets up the screen size variables
   await Firebase.initializeApp(

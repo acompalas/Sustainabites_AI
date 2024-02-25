@@ -9,11 +9,11 @@ import 'package:flutter/material.dart';
 
 
 
-class BottomNavBar extends StatefulWidget{
+class mainPage extends StatefulWidget{
   @override
-  _BottomNavBar createState()=> _BottomNavBar();
+  _mainPage createState()=> _mainPage();
 }
-class _BottomNavBar extends State<BottomNavBar>{
+class _mainPage extends State<mainPage>{
   @override
   int currentIndex = 0;
   final screens = [
@@ -24,7 +24,9 @@ class _BottomNavBar extends State<BottomNavBar>{
     //accountPage(),
   ];
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
+    return Scaffold(
+      body: screens[currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
       enableFeedback: false,
       iconSize: screenHeight * .05,
@@ -42,6 +44,7 @@ class _BottomNavBar extends State<BottomNavBar>{
       ],
       currentIndex: currentIndex,
       onTap: (index) =>setState(()=> currentIndex = index),
+      ),
     );
   }
 }
