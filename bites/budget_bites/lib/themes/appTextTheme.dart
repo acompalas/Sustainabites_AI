@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 
-class appTextTheme{
-  static TextStyle appTitle = TextStyle( //used for 'Budget Bites' Title in beginning screens
+class appTextTheme {
+  static TextStyle appTitle = TextStyle(
+    //used for 'Budget Bites' Title in beginning screens
     fontFamily: 'JosefinSans',
     fontSize: fontMultiplier * 2.4,
     fontWeight: FontWeight.w300,
     color: appColorTheme.blackText,
   );
-  static TextStyle textUnderTitle = TextStyle( //used for stuff under title
+  static TextStyle textUnderTitle = TextStyle(
+    //used for stuff under title
     fontFamily: 'JosefinSans',
     fontSize: fontMultiplier * 1.8,
     fontWeight: FontWeight.w100,
@@ -30,10 +32,10 @@ class appTextTheme{
     color: appColorTheme.buttonTextColor,
   );
   static TextStyle signInUpTextLabel = TextStyle(
-    fontFamily:' JosefinSans',
+    fontFamily: ' JosefinSans',
     fontSize: fontMultiplier * 1,
     fontWeight: FontWeight.w100,
-    color:appColorTheme.textLabel,
+    color: appColorTheme.textLabel,
   );
   static TextStyle smallerButtonText = TextStyle(
     fontFamily: 'JosefinSans',
@@ -56,5 +58,18 @@ class appTextTheme{
     fontFamily: 'JosefinSans',
     fontSize: fontMultiplier * 0.6,
     fontWeight: FontWeight.w200,
+  );
+  static TextStyle myPantryBoxTitle = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 1.1,
+    fontWeight: FontWeight.w400,
+    color: appColorTheme.blackText,
+  );
+  static TextStyle homePageTitle = TextStyle(
+    // Used for the title text in HomePage
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 2, // Adjust font size as needed
+    fontWeight: FontWeight.w400,
+    color: appColorTheme.blackText,
   );
 }
