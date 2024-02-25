@@ -91,12 +91,6 @@ class cuisine {
   cuisine(this.cuisineName, this.selected);
 }
 
-class cuisine {
-  String cuisineName;
-  bool selected;
-  cuisine(this.cuisineName, this.selected);
-}
-
 class cuisineBar extends StatefulWidget {
   @override
   _cuisineBar createState() => _cuisineBar();

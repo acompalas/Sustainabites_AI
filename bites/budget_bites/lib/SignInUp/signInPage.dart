@@ -1,12 +1,9 @@
 import 'package:budget_bites/appPages/cartPage.dart';
 import 'package:budget_bites/appPages/discoverPage.dart';
-<<<<<<< Updated upstream
 import 'package:budget_bites/appPages/mainPage.dart';
 import 'package:budget_bites/shared/navigationBar.dart';
-=======
 import 'package:budget_bites/appPages/homePage.dart';
 import 'package:budget_bites/appPages/homePage.dart';
->>>>>>> Stashed changes
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
@@ -151,21 +148,11 @@ class signInButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
       ),
-<<<<<<< Updated upstream
-      decoration: BoxDecoration(
-        color: appColorTheme.buttonColor,
-        borderRadius: BorderRadius.circular(30),
-      ),
-      ),
-      onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => mainPage()),);
-=======
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => mainPage()),
         );
->>>>>>> Stashed changes
       },
     );
   }
