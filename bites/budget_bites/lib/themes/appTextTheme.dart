@@ -56,7 +56,7 @@ class appTextTheme {
   );
   static TextStyle cuisineBarText = TextStyle(
     fontFamily: 'JosefinSans',
-    fontSize: fontMultiplier * 0.6,
+    fontSize: fontMultiplier * .7,
     fontWeight: FontWeight.w200,
   );
   static TextStyle myPantryBoxTitle = TextStyle(
@@ -78,5 +78,11 @@ class appTextTheme {
     fontWeight: FontWeight.w400,
     color: appColorTheme.blackText,
     height: 1,
+  );
+  static TextStyle serachIngredientTitle = TextStyle(
+    fontFamily: 'JosefinSans',
+    fontSize: fontMultiplier * 1.4,
+    fontWeight: FontWeight.w300,
+    color: appColorTheme.blackText,
   );
 }

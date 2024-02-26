@@ -1,4 +1,6 @@
+import 'package:budget_bites/appPages/searchIngredients.dart';
 import 'package:budget_bites/main.dart';
+import 'package:budget_bites/models/models.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
 import 'package:budget_bites/shared/navigationBar.dart';
@@ -13,7 +15,6 @@ class _discoverPage extends State<discoverPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //bottomNavigationBar: BottomNavBar(),
       resizeToAvoidBottomInset: false,
       backgroundColor: appColorTheme.backgroundColor,
       body: Container(
@@ -28,9 +29,30 @@ class _discoverPage extends State<discoverPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  discoverSearchBar(),
                   Padding(padding: EdgeInsets.only(bottom: screenHeight * .02)),
+                  discoverSearchBar(),
+                  Padding(padding: EdgeInsets.only(bottom: screenHeight * .01)),
+                  Text(      
+                    'Want to try out a new cuisine?',
+                    textAlign: TextAlign.left,
+                    style: appTextTheme.myPantryBoxTitle,
+                  ),
                   cuisineBar(),
+                  Padding(padding: EdgeInsets.only(bottom: screenHeight * .02)),
+                  Text(      
+                    'Want something specific?',
+                    textAlign: TextAlign.left,
+                    style: appTextTheme.myPantryBoxTitle,
+                  ),
+                  mealTypeBar(),
+                  Padding(padding: EdgeInsets.only(bottom: screenHeight * .02)),
+                  Text(       
+                    'Search using your ingredients',
+                    textAlign: TextAlign.left,
+                    style: appTextTheme.myPantryBoxTitle,
+                  ),
+                  Padding(padding: EdgeInsets.only(bottom: screenHeight * .01)),
+                  startAddingIngredients(),
                 ],
               ),
             ),
@@ -77,7 +99,7 @@ class _discoverSearchBar extends State<discoverSearchBar> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
-            hintText: 'I forgot what this is for',
+            hintText: 'Search Recipies',
             hintStyle: appTextTheme.searchBar,
             hintMaxLines: 1,
           ),
@@ -85,92 +107,162 @@ class _discoverSearchBar extends State<discoverSearchBar> {
   }
 }
 
-class cuisine {
-  String cuisineName;
-  bool selected;
-  cuisine(this.cuisineName, this.selected);
+
+class startAddingIngredients extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double boxWidth = screenWidth * 0.98;
+    final double boxHeight = screenHeight * 0.25;
+
+    return Center(
+      child: Hero(
+        tag: 'pantryImage', // Unique tag for the Hero widget
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => IngredientsSelectorPage()),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            padding: EdgeInsets.zero,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            elevation: 4,
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 7,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                'assets/imgs/pantry.png',
+                width: boxWidth,
+                height: boxHeight,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
-class cuisineBar extends StatefulWidget {
+class cuisineBar extends StatefulWidget{
   @override
   _cuisineBar createState() => _cuisineBar();
 }
 
-class _cuisineBar extends State<cuisineBar> {
-  final List<cuisine> cuisineList = <cuisine>[
-    cuisine('African', false),
-    cuisine('Asian', false),
-    cuisine('American', false),
-    cuisine('British', false),
-    cuisine('Cajun', false),
-    cuisine('Caribbean', false),
-    cuisine('Chinese', false),
-    cuisine('Eastern European', false),
-    cuisine('European', false),
-    cuisine('French', false),
-    cuisine('German', false),
-    cuisine('Greek', false),
-    cuisine('Indian', false),
-    cuisine('Irish', false),
-    cuisine('Italian', false),
-    cuisine('Japanese', false),
-    cuisine('Jewish', false),
-    cuisine('Korean', false),
-    cuisine('Latin American', false),
-    cuisine('Mediterranean', false),
-    cuisine('Mexican', false),
-    cuisine('Middle Eastern', false),
-    cuisine('Nordic', false),
-    cuisine('Southern', false),
-    cuisine('Spanish', false),
-    cuisine('Thai', false),
-    cuisine('Vietnamese', false),
-  ];
-  Color _colorContainer = appColorTheme.cuisineUnselected;
-  @override
+class _cuisineBar extends State<cuisineBar>{
+  List<cuisine> cuisines = [];
+ void _getCuisineList(){
+    cuisines = cuisine.getCuisineList();
+  }
   Widget build(BuildContext context) {
-    cuisineList.shuffle();
+    _getCuisineList();
     return Container(
-        height: screenHeight * .03,
+        height: screenHeight * .14,
         width: screenWidth * .95,
         child: ListView.separated(
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(width: screenWidth * .01);
-            },
-            scrollDirection: Axis.horizontal,
-            //padding: EdgeInsets.only(left: screenWidth * .1),
-            itemCount: cuisineList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                child: Container(
-                  padding: EdgeInsets.only(
-                      left: screenWidth * .01, right: screenWidth * .01),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: _colorContainer,
-                  ),
-                  child: Center(
-                    child: Text(
-                      cuisineList[index].cuisineName,
-                      style: appTextTheme.cuisineBarText,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+          itemCount: cuisines.length,
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (context, index) => SizedBox(width: screenWidth * .05),
+          padding: EdgeInsets.only(left: screenWidth * .01, right: screenWidth * .01),
+          itemBuilder: (context, index){
+            return GestureDetector( 
+              onTap: (){},
+              child: Container(
+                height: screenHeight * .1,
+                width: screenWidth * .3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: appColorTheme.buttonColor
                 ),
-                onTap: () {
-                  setState(() {
-                    if (cuisineList[index].selected == false) {
-                      cuisineList[index].selected == true;
-                    } else {
-                      cuisineList[index].selected == false;
-                    }
-                    _colorContainer =
-                        _colorContainer == appColorTheme.cuisineUnselected
-                            ? appColorTheme.cuisineSelected
-                            : appColorTheme.cuisineUnselected;
-                  });
-                },
-              );
-            }));
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: screenWidth * .2,
+                      height: screenHeight * .08,
+                    ),
+                    Text(
+                      cuisines[index].cuisineName,
+                      style: appTextTheme.cuisineBarText,
+                    )
+                  ]
+                ),
+              )
+            );
+          }
+         ),
+    );
+  }
+}
+
+
+
+
+class mealTypeBar extends StatefulWidget{
+  @override
+  _mealTypeBar createState() => _mealTypeBar();
+}
+
+class _mealTypeBar extends State<mealTypeBar>{
+  List<mealType> mealTypes = [];
+ void _getMealTypeList(){
+    mealTypes = mealType.getMealTypeList();
+  }
+  Widget build(BuildContext context) {
+    _getMealTypeList();
+    return Container(
+        height: screenHeight * .14,
+        width: screenWidth * .95,
+        child: ListView.separated(
+          itemCount: mealTypes.length,
+          scrollDirection: Axis.horizontal,
+          separatorBuilder: (context, index) => SizedBox(width: screenWidth * .05),
+          padding: EdgeInsets.only(left: screenWidth * .01, right: screenWidth * .01),
+          itemBuilder: (context, index){
+            return GestureDetector( 
+              onTap: (){},
+              child: Container(
+                height: screenHeight * .1,
+                width: screenWidth * .3,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  color: Color.fromARGB(255, 255, 0, 0)
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: screenWidth * .2,
+                      height: screenHeight * .08,
+                    ),
+                    Text(
+                      mealTypes[index].name,
+                      style: appTextTheme.cuisineBarText,
+                    )
+                  ]
+                ),
+              )
+            );
+          }
+         ),
+    );
   }
 }
