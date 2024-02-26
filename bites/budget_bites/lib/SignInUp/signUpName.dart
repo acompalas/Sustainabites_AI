@@ -1,14 +1,17 @@
-import 'package:budget_bites/SignInUp/signUpCuisine.dart';
+import 'package:budget_bites/appPages/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
+import 'package:budget_bites/services/auth.dart';
+import 'package:budget_bites/services/database.dart';
 
 String _firstName = "";
 String _lastName = "";
 
 final _firstformKey = GlobalKey<FormState>();
 final _lastformKey = GlobalKey<FormState>();
+final AuthService _auth = AuthService();
 
 class enterFirstNameText extends StatefulWidget{
   @override
@@ -128,13 +131,21 @@ class enterNameButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
       ),
-      onTap: () {
+      onTap: () async{
         if (_firstformKey.currentState!.validate() && _lastformKey.currentState!.validate()) {
-          // Validation passed, navigate to the next screen
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => signUpCuisine()),
-          );
+          // Validation passed, get the UID
+          dynamic uid = await _auth.getUID();
+          if (uid != null && uid != "false") {
+            // If UID is valid, create the DatabaseService instance
+            final DatabaseService databaseService = DatabaseService(uid: uid);
+            // Update the name in the database
+            await databaseService.updateName(_firstName, _lastName);
+            // Navigate to the next screen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => mainPage()),
+            );
+          }
         }
       },
     );
