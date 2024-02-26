@@ -1,4 +1,4 @@
-import 'package:budget_bites/SignInUp/signUpCuisine.dart';
+import 'package:budget_bites/appPages/mainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/main.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
@@ -143,7 +143,7 @@ class enterNameButton extends StatelessWidget {
             // Navigate to the next screen
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => signUpCuisine()),
+              MaterialPageRoute(builder: (context) => mainPage()),
             );
           }
         }

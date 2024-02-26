@@ -1,7 +1,9 @@
+import 'package:budget_bites/SignInUp/signInPage.dart';
 import 'package:budget_bites/shared/navigationBar.dart';
 import 'package:budget_bites/themes/appColorTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
+import 'package:budget_bites/services/auth.dart';
 
 class AccountPage extends StatelessWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -81,15 +83,21 @@ class AccountPage extends StatelessWidget {
                 ]
               ,),
               const SizedBox(height: 20),
-              const Row(
+              InkWell(
+              onTap: () {
+                // Call the sign-out function from your authentication service
+                AuthService().signOut();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => signInPage()),);
+              },
+              child: const Row(
                 children: [
                   Icon(Icons.logout),
                   Text('  Log Out', style: TextStyle(fontSize: 24)),
                 ]
-              ,)
-            ]
+              ),
+          )]
           ,)
-       ),
+      ),
     );
   }
 }
