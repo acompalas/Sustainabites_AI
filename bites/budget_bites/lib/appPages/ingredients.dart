@@ -1,50 +1,159 @@
 import 'package:flutter/material.dart';
 import 'package:budget_bites/themes/appTextTheme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:budget_bites/themes/appColorTheme.dart';
+import 'package:provider/provider.dart';
+import 'package:budget_bites/appPages/inventory_state.dart';
+
+const int maxSlotsPerPage = 12;
+
+class IngredientPopup extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    // Determine the size of the square box
+    double boxWidth = screenWidth * 1.0;
+    double boxHeight = screenHeight * 0.4;
+    double circleSize = screenWidth * 0.45;
+
+    return AlertDialog(
+      contentPadding: EdgeInsets.zero,
+      content: SingleChildScrollView(
+        child: Container(
+          width: boxWidth,
+          height: boxHeight,
+          padding: EdgeInsets.fromLTRB(15.0, 20.0, 10.0, 15.0),
+          alignment: Alignment.topCenter,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: circleSize,
+                height: circleSize,
+                alignment: Alignment.topCenter,
+                child: Container(
+                  width: circleSize,
+                  height: circleSize,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black), // Black border
+                  ),
+                ),
+              ),
+              SizedBox(height: 20.0),
+              Container(
+                width: circleSize * 1.5, // Adjust the width here
+                child: TextField(
+                  textAlign: TextAlign.center, // Center align the text
+                  decoration: InputDecoration(
+                    hintText: 'Empty',
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 10.0,
+                      horizontal: 3.0,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 5.0),
+              ElevatedButton(
+                onPressed: () {
+                  // Add functionality to add ingredient
+                },
+                child: Text('Add'),
+                style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all<Size>(
+                      Size(150, 50)), // Adjust the button size here
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class IngredientSlot extends StatefulWidget {
+  final int index;
+  final List<InventoryItem> items;
+  final void Function(int) onSlotPressed;
+
+  IngredientSlot({
+    required this.index,
+    required this.items,
+    required this.onSlotPressed,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  _IngredientSlotState createState() => _IngredientSlotState();
+}
+
+class _IngredientSlotState extends State<IngredientSlot> {
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        // Call the provided callback when the slot is pressed
+        widget.onSlotPressed(widget.index);
+      },
+      child: CircleAvatar(
+        radius: 16.0,
+        backgroundColor: Colors.white,
+        child: Text(
+          '${widget.index + 1}', // Display the index number inside the circle
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+    );
+  }
+}
 
 class Page extends StatelessWidget {
-  final Key? key; // Nullable key parameter
+  final int pageIndex;
+  final List<InventoryItem> items;
 
-  const Page({this.key}) : super(key: key);
+  const Page({
+    required this.pageIndex,
+    required this.items,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(10.0), // Rounded corners for each page
-      //   boxShadow: [
-      //     BoxShadow(
-      //       color: Colors.grey.shade300,
-      //     ),
-      //     BoxShadow(
-      //       color: Colors.white,
-      //       spreadRadius: -5.0,
-      //       blurRadius: 12.0,
-      //     ),
-      //   ],
-      // ),
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.only(top: 25.0), // Add padding to the top
+          padding: const EdgeInsets.only(top: 10.0),
           child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(), // Disable scrolling
-            padding: EdgeInsets.zero, // No padding
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.zero,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3, // 3 circles per row
+              crossAxisCount: 3,
               crossAxisSpacing: 10.0,
               mainAxisSpacing: 10.0,
             ),
-            itemCount: 12, // Total circles
+            itemCount: maxSlotsPerPage,
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black), // Black border
-                ),
-                child: CircleAvatar(
-                  radius: 16.0,
-                  backgroundColor: Colors.white, // Empty circle
-                ),
+              int actualIndex = pageIndex * maxSlotsPerPage + index;
+              items[actualIndex].index = actualIndex;
+              return IngredientSlot(
+                index: actualIndex,
+                items: items,
+                onSlotPressed: (index) {
+                  // Show the ingredient popup when a slot is pressed
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return IngredientPopup();
+                    },
+                  );
+                },
               );
             },
           ),
@@ -55,7 +164,8 @@ class Page extends StatelessWidget {
 }
 
 class IngredientBox extends StatefulWidget {
-  final Function(int) onIndexChanged; // Callback function to notify index change
+  final Function(int)
+      onIndexChanged; // Callback function to notify index change
 
   IngredientBox({required this.onIndexChanged});
 
@@ -64,7 +174,7 @@ class IngredientBox extends StatefulWidget {
 }
 
 class _IngredientBoxState extends State<IngredientBox> {
-  static const int defaultPages = 3; // Default number of pages
+  static const int defaultPages = 5; // Default number of pages
   int _currentIndex = 0;
   int _numPages = defaultPages;
 
@@ -82,7 +192,8 @@ class _IngredientBoxState extends State<IngredientBox> {
         onPageChanged: (index, reason) {
           setState(() {
             _currentIndex = index;
-            print('Current Index: $_currentIndex'); // Print current index for debugging
+            print(
+                'Current Index: $_currentIndex'); // Print current index for debugging
           });
           // Call the callback to notify the index change
           widget.onIndexChanged(index);
@@ -103,12 +214,8 @@ class _IngredientBoxState extends State<IngredientBox> {
               width: screenWidth,
               margin: const EdgeInsets.symmetric(horizontal: 5.0),
               child: Page(
-                // child: Center(
-                //   child: Text(
-                //     'Page ${index + 1}',
-                //     style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                //   ),
-                // ),
+                pageIndex: index,
+                items: items,
               ),
             );
           },
@@ -117,6 +224,7 @@ class _IngredientBoxState extends State<IngredientBox> {
     );
   }
 }
+
 class DotIndicator extends StatelessWidget {
   final int currentIndex;
   final int itemCount;
@@ -146,7 +254,6 @@ class DotIndicator extends StatelessWidget {
   }
 }
 
-
 class Inventory extends StatefulWidget {
   @override
   _InventoryState createState() => _InventoryState();
@@ -154,18 +261,20 @@ class Inventory extends StatefulWidget {
 
 class _InventoryState extends State<Inventory> {
   int _currentIndex = 0;
-  int _numPages = 3; // Initially set to 3, but can be updated as users add pages
+  int _numPages =
+      5; // Initially set to 3, but can be updated as users add pages
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
+          margin:
+              EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.3),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.75,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: appColorTheme.backgroundColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10.0),
               topRight: Radius.circular(10.0),
@@ -205,7 +314,7 @@ class _InventoryState extends State<Inventory> {
                 currentIndex: _currentIndex,
                 itemCount: _numPages, // Pass the dynamic itemCount here
               ),
-              SizedBox(height: 16.0),
+              SizedBox(height: 10.0),
               FloatingActionButton(
                 onPressed: () {}, // Add your functionality here
                 backgroundColor: Color(0xFFd9ead3), // Light green color
@@ -254,7 +363,8 @@ class IngredientsPage extends StatelessWidget {
               backgroundColor: Colors.transparent, // Make app bar transparent
               elevation: 0, // Remove app bar shadow
               automaticallyImplyLeading: true, // Show the back arrow
-              iconTheme: IconThemeData(color: Colors.black87), // Change the color of the back arrow
+              iconTheme: IconThemeData(
+                  color: Colors.black87), // Change the color of the back arrow
             ),
           ),
           Positioned(

@@ -144,6 +144,7 @@ class HomePage extends StatelessWidget {
           style: appTextTheme.homePageTitle, // Use the homePageTitle style here
         ),
         automaticallyImplyLeading: false, // Disable the back arrow
+        elevation: 0.0,
       ),
       body: SingleChildScrollView(
         child: Column(
