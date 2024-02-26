@@ -19,7 +19,7 @@ class _mainPage extends State<mainPage> {
   int currentIndex = 0;
   final screens = [
     HomePage(),
-    discoverPage(),
+    //discoverPage(),
     savedPage(),
     cartPage(),
     AccountPage(),
@@ -42,8 +42,8 @@ class _mainPage extends State<mainPage> {
           BottomNavigationBarItem(icon: Icon(Icons.receipt), label: "Saved"),
           BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag), label: "Cart"),
-           BottomNavigationBarItem(
-               icon: Icon(Icons.account_circle), label: "Account"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle), label: "Account"),
         ],
         currentIndex: currentIndex,
         onTap: (index) => setState(() => currentIndex = index),
