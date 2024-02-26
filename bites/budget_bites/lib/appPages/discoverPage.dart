@@ -121,10 +121,10 @@ class startAddingIngredients extends StatelessWidget {
         tag: 'pantryImage', // Unique tag for the Hero widget
         child: ElevatedButton(
           onPressed: () {
-            Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => IngredientsSelectorPage()),
-            );
+            // Navigator.push(
+            // context,
+            // MaterialPageRoute(builder: (context) => IngredientsSelectorPage()),
+            // );
           },
           style: ElevatedButton.styleFrom(
             padding: EdgeInsets.zero,
