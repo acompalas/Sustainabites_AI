@@ -1,3 +1,4 @@
+import 'package:budget_bites/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -32,7 +33,11 @@ class AuthService {
         password: password,
       );
       User? user = userCredential.user;
-      print("User registered: ${user!.uid}");
+
+      // create a new document for the user with the uid
+      await DatabaseService(uid: user!.uid).updateName("nullFirst", "nullLast");
+
+      print("User registered: ${user.uid}");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
@@ -40,7 +45,21 @@ class AuthService {
     } catch (e) {
       print(e);
     }
-  } 
+  }
+  
+
+  Future<String?> getUID() async {
+  // Get the current user from FirebaseAuth
+  User? user = FirebaseAuth.instance.currentUser;
+
+  // If the user is not null, return the UID
+  if (user != null) {
+    return user.uid;
+  } else {
+    // If no user is signed in, return null
+    return "false";
+  }
+}
 
   // sign out
   Future signOut() async {
