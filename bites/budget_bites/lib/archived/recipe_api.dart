@@ -22,9 +22,10 @@ class Recipe {
 }
 
 class RecipeAPI {
-  static Future<List<Recipe>> fetchRecipes(List<String> selectedIngredients) async {
+  static Future<List<Recipe>> fetchRecipes(List<String> selectedIngredients, {String? cuisine}) async {
     final apiKey = '28211f3954474589825fc9c5345ac3d7';
     final ingredientsQuery = selectedIngredients.join(',+');
+    final cuisineQuery = cuisine != null ? '&cuisine=$cuisine' : '';
     final uri = Uri.parse('https://api.spoonacular.com/recipes/findByIngredients?ingredients=$ingredientsQuery&number=10&apiKey=$apiKey');
     print('Final URI: $uri');
 
